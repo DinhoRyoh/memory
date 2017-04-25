@@ -12,10 +12,14 @@
   </head>
   <body>
     <h1 class="hvr-grow">Magomashi !</h1>
-    <section id="game">
+    <section id="theGame">
       <article id="teacher">
         <img class="perso_image" src="images/teacher.jpg" alt="teacher"><br>
-        <span id="element"></span>
+        <div id="app-3">
+          <span v-if="seen">Now you see me</span>
+        </div>
+        <span id="element"></span><br>
+        <span id="rules"></span>
         <article id="menu">
           <a id="yes" href="#"><button>Teach me Mago !</button></a>
           <a id="gotIt" href="#"><button>Got it !</button></a>
@@ -25,12 +29,18 @@
       </article>
       <h4 id="player"></h4>
       <article id="gameboard">
-        <div class="game"></div>
+        <nav id="menu_difficulty">
+          <ul id="difficulty">
+            <li><a id="easy" href="#">Easy</a></li>
+            <li><a id="normal" href="#">Normal</a></li>
+            <li><a id="hard" href="#">Hard</a></li>
+          </ul>
+        </nav>
       </article>
     </section>
   </body>
   <script src="vendor/vue.min.js"></script>
-  <script src="vendor/Memory/js/memory.js"></script>
+  <!-- <script src="vendor/Memory/js/memory.js"></script> -->
   <script type="text/javascript" src="js/functions.js"></script>
   <script src="vendor/typed.js/js/typed.js"></script>
   <script type="text/javascript" src="js/game.js"></script>

@@ -20,11 +20,15 @@ hide(gotIt);
 var no = document.getElementById('no');
 var gameboard = document.getElementById('gameboard');
 var player = document.getElementById('player');
+var rules = document.getElementById('rules');
 hide(gameboard);
 yes.onclick = function(){
   hide(yes);
   hide(no);
-  element.innerHTML = "You just have to find the same card one time in a row ! If you don't the first card picked will return to the hide face";
+  Typed.new("#element", {
+    strings: ["You just have to find the same card as the one you just picked in the row ! If you didn't, the both cards picked will return back to the hide face"],
+    typeSpeed: 0
+  });
   show(gotIt);
 }
 no.onclick = function(){
@@ -33,16 +37,22 @@ no.onclick = function(){
   element.innerHTML = "Let's play !";
   unfade(gameboard);
   player.innerHTML = "player : "+localStorage.getItem('user');
-  var memo = new Memory({
-      wrapperID : "game",
-    });
+  // var memo = new Memory({
+  //     wrapperID : "game",
+  //   });
 }
 gotIt.onclick = function(){
   hide(gotIt);
   element.innerHTML = "Let's play !";
   unfade(gameboard);
   player.innerHTML = "player : "+localStorage.getItem('user');
-  var memo = new Memory({
-      wrapperID : "game",
-    });
+  // var memo = new Memory({
+  //     wrapperID : "game",
+  //   });
 }
+var app3 = new Vue({
+  el: '#app-3',
+  data: {
+    seen: false
+  }
+}) ;
