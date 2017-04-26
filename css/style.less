@@ -2,11 +2,22 @@
 body{
   margin:0;
   text-align: center;
+  background-color: rgba(52, 73, 94,1.0);
   font-family: 'Acme', sans-serif;
   h1{
     font-size: 45px;
     color: rgba(255, 126, 10,1);
     text-decoration: underline;
+  }
+  .bulle{
+    margin: 0 auto;
+    width: 37.5vw;
+    padding: 30px;
+    font-family: 'Acme', sans-serif;
+    font-weight: bold;
+    background-color: rgba(241, 196, 15,1.0)!important;
+    border: 3px solid black;
+    border-radius: 15px 15px;
   }
   .space{
     height: 50px;
@@ -17,7 +28,7 @@ body{
     width: 100%;
     height: 100%;
     z-index: 100;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(52, 73, 94,0.8);
   }
   .intro{
     ::-webkit-input-placeholder {
@@ -99,6 +110,7 @@ body{
     }
   }
   #theGame{
+    text-align: center;
     #teacher{
       .perso_image{
         width: 6rem;
@@ -130,19 +142,23 @@ body{
       #difficulty{
         list-style: none;
         padding: 0;
-        li{
-          display: inline-block;
-          a{
-            text-decoration: none;
+        a{
+          text-decoration: none;
+          color: black;
+          li{
+            display: inline-block;
+            padding: 15px 35px;
+            border: 3px ridge black;
+            border-radius: 5px 5px;
           }
-          #easy{
-            color: rgba(39, 174, 96,1.0);
+          .easy{
+            background-color: rgba(39, 174, 96,1.0);
           }
-          #normal{
-            color: rgba(241, 196, 15,1.0);
+          .normal{
+            background-color: rgba(241, 196, 15,1.0);
           }
-          #hard{
-            color: rgba(231, 76, 60,1.0);
+          .hard{
+            background-color: rgba(231, 76, 60,1.0);
           }
         }
       }
@@ -219,7 +235,7 @@ body{
 .mg__wrapper {
   padding-top: 50px;
   margin: 0 auto;
-  width: 75%;
+  width: 35%;
 }
 
 .mg__contents {
@@ -660,4 +676,7 @@ body{
 
 #fusionads a.fusion-poweredby {
   color: #28aadc;
+}
+.hvr-pulse{
+  z-index:100;
 }

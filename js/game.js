@@ -29,6 +29,8 @@ yes.onclick = function(){
     strings: ["You just have to find the same card as the one you just picked in the row ! If you didn't, the both cards picked will return back to the hide face"],
     typeSpeed: 0
   });
+  var mascotte = document.getElementById('mascotte');
+  mascotte.src = "/images/teacher.png";
   show(gotIt);
 }
 no.onclick = function(){
@@ -49,6 +51,8 @@ gotIt.onclick = function(){
   // var memo = new Memory({
   //     wrapperID : "game",
   //   });
+  var mascotte = document.getElementById('mascotte');
+  mascotte.src = "/images/hubi.png";
 }
 var app3 = new Vue({
   el: '#app-3',

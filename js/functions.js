@@ -34,7 +34,7 @@ function introduction(){
   fade(mask);
   fade(intro);
   unfade(content);
-  user_intro.innerHTML = "Bienvenue "+intro.elements["name"].value;
+  user_intro.innerHTML = "Our hero "+intro.elements["name"].value;
     Typed.new("#element", {
       strings: ["Hey you ! Hum...", "Hello "+intro.elements["name"].value+"! I'm Mago, nice to meet you !"],
       typeSpeed: 0
@@ -65,6 +65,14 @@ loadJSON(function(response) {
   image = JSON.parse(response);
 });
 //game
+gameState = 1;
+card1 ="";
+card2 ="";
+card1id = "";
+card2id = "";
+card1flipped = false;
+card2flipped = false;
+flippedTiles = 0;
 var easy = document.getElementById("easy");
 var normal = document.getElementById("normal");
 var hard = document.getElementById("hard");
@@ -96,31 +104,44 @@ function shuffleIt(array) {
     }
     return array;
 }
-
+function shuffleIt2(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
 function fillTile(_widthX,_heightY){
   var tile = document.createElement('div');
   tile.className = "topping";
   var res = "";
   var shuffle = [];
   shuffle = shuffleIt(image);
-  var numTiles = _widthX * _heightY;
+  numTiles = _widthX * _heightY;
   var halfNum = numTiles/2;
   cardInGame = [];
   for (var i = 0; i < halfNum; i++) {
     cardInGame.push(shuffle.image[i],shuffle.image[i]);
   }
+  shuffleAgain = shuffleIt2(cardInGame);
   for (var i = 0; i < numTiles; i++) {
     var n = i + 1;
     res = res + '<div class="mg__tile mg__tile-' +
      n + '"><div class="mg__tile--inner" data-id="' +
-      cardInGame[i]["id"] +
+      shuffleAgain[i]["id"] +
        '"><span class="mg__tile--outside"></span><span class="mg__tile--inside"><img src="' +
-        cardInGame[i]["img"] +
+        shuffleAgain[i]["img"] +
          '"></span></div></div>';
   }
   tile.innerHTML = res;
   document.getElementById("board").appendChild(tile);
-
+  var tiles = document.querySelectorAll(".mg__tile--inner");
+  for (var i = 0, len = tiles.length; i < len; i++) {
+    var tile = tiles[i];
+    play(tile);
+  };
 }
 function setup(_widthX,_heightY,level){
   var board = document.createElement('div');
@@ -154,73 +175,202 @@ function setup(_widthX,_heightY,level){
     var game = document.getElementById('game');
     game.remove();
   }
-  play(board);
 }
 var difficulty = document.getElementById("difficulty");
   difficulty.onclick = function difficulty(){
     switch (chosenLevel) {
       case "easy":
+          var mascotte = document.getElementById('mascotte');
+          mascotte.src = "/images/oktobercat.png";
+          Typed.new("#element", {
+            strings: ["Hey ! I'm Oktober."],
+            typeSpeed: 0
+          });
+          setTimeout(function () {
+            Typed.new("#element", {
+              strings: ["Let's drink !"],
+              typeSpeed: 0
+            });
+          }, 2000);
           setup(4,2,1);
         break;
       case "normal":
+          var mascotte = document.getElementById('mascotte');
+          mascotte.src = "/images/heisencat.png";
+          Typed.new("#element", {
+            strings: ["Hey ! I'm heisencat."],
+            typeSpeed: 0
+          });
+          setTimeout(function () {
+            Typed.new("#element", {
+              strings: ["Wanna some pepper ?!"],
+              typeSpeed: 0
+            });
+          }, 2000);
           setup(6,3,2);
         break;
       case "hard":
+          var mascotte = document.getElementById('mascotte');
+          mascotte.src = "/images/vulcain.png";
+          Typed.new("#element", {
+            strings: ["Hello Human. I'm vulcain."],
+            typeSpeed: 0
+          });
+          setTimeout(function () {
+            Typed.new("#element", {
+              strings: ["I have no choice then, let's work."],
+              typeSpeed: 0
+            });
+          }, 2000);
           setup(8,4,3);
         break;
-      default:
-          setup(6,3,2);
     }
 }
-function play(board){
-  var firstCard = true;
-  var lastCard = false;
-  var idCard1;
-  var idCard2;
-  var tile1;
-  var tile2;
-  var res;
-  var flag = true;
-    if(!firstCard){
-      board.onclick = function(){
-        console.log("if");
-        if (!this.classList.contains("flipped")) {
-          tile2 = this;
-          this.classList.add("flipped");
-          idCard2 = this.getAttribute("data-id");
-          res = match(idCard1,idCard2);
-          firstCard = true;
-          lastCard = true;
-          nbMove += 1;
-        }
-      }
-    }else {
-      console.log("else");
-      board.onclick = function(){
-        console.log(this);
-        if (!this.classList.contains("flipped")) {
-          tile1 = this;
-          this.classList.add("flipped");
-          idCard1 = this.getAttribute("data-id");
-          firstCard = false;
-          lastCard = false;
+countGood = 0;
+function play(tile){
+  tile.addEventListener( "click", function(e) {
+    if (!tile.classList.contains("flipped")) {
+      if (card1flipped === false && card2flipped === false) {
+        this.classList.add("flipped");
+        card1 = this;
+        card1id = this.getAttribute("data-id");
+        card1flipped = true;
+      } else if( card1flipped === true && card2flipped === false ) {
+        this.classList.add("flipped");
+        card2 = this;
+        card2id = this.getAttribute("data-id");
+        card2flipped = true;
+        if ( card1id == card2id ) {
+          switch (countGood) {
+            case 1:
+              Typed.new("#element", {
+                strings: ["You're smarter than I though."],
+                typeSpeed: 0
+              });
+              countGood = countGood + 1;
+              break;
+            case 4:
+              Typed.new("#element", {
+                strings: ["Meeekaay."],
+                typeSpeed: 0
+              });
+              countGood = countGood + 1;
+              break;
+            case 7:
+              Typed.new("#element", {
+                strings: ["Im..Impressive !"],
+                typeSpeed: 0
+              });
+              countGood = countGood + 1;
+              break;
+            case 11:
+              Typed.new("#element", {
+                strings: ["H-hoowwww ?! Incredible !!!!"],
+                typeSpeed: 0
+              });
+              countGood = countGood + 1;
+              break;
+            case 13:
+              Typed.new("#element", {
+                strings: ["I'm your fan <3"],
+                typeSpeed: 0
+              });
+              countGood = countGood + 1;
+              break;
+            case 15:
+              Typed.new("#element", {
+                strings: ["GOD !!! Kappa"],
+                typeSpeed: 0
+              });
+              countGood = countGood + 1;
+              break;
+            default:   countGood = countGood + 1;
+          }
+          gameCardsMatch();
+        } else {
+          gameCardsMismatch();
         }
       }
     }
-    if (!res && lastCard) {
-      tile1.classList.remove("flipped");
-      tile2.classList.remove("flipped");
-    }else if (res && lastCard) {
-      tile1.classList.add("correct");
-      tile2.classList.add("correct");
-    }
+  });
 }
-function match(tile1,tile2){
-  if (tile1 == tile2) {
-    return true;
-  }else {
-    return false;
+function gameCardsMatch() {
+  // add correct class
+  window.setTimeout( function(){
+    card1.classList.add("correct");
+    card2.classList.add("correct");
+  }, 300 );
+
+  // remove correct class and reset vars
+  window.setTimeout( function(){
+    card1.classList.remove("correct");
+    card2.classList.remove("correct");
+    gameResetVars();
+    flippedTiles = flippedTiles + 2;
+    if (flippedTiles == numTiles) {
+      winGame();
+    }
+  }, 1500 );
+
+  // plus one on the move counter
+  gameCounterPlusOne();
+};
+function gameCardsMismatch() {
+  // remove "flipped" class and reset vars
+  window.setTimeout( function(){
+    card1.classList.remove("flipped");
+    card2.classList.remove("flipped");
+    gameResetVars();
+  }, 900 );
+
+  // plus one on the move counter
+  gameCounterPlusOne();
+};
+function gameResetVars() {
+  card1 = "";
+  card2 = "";
+  card1id = "";
+  card2id = "";
+  card1flipped = false;
+  card2flipped = false;
+}
+function gameCounterPlusOne() {
+  nbMove = nbMove + 1;
+  moveCounterUpdate = document.getElementById("mg__meta--moves").innerHTML = nbMove;
+};
+function winGame() {
+  if (onGameEnd() === false) {
+    var mascotte = document.getElementById('mascotte');
+    Typed.new("#element", {
+      strings: ["Well done !"],
+      typeSpeed: 0
+    });
+    setTimeout(function () {
+      Typed.new("#element", {
+        strings: ["PLAY AGAIIIIIIIIN ?!"],
+        typeSpeed: 0
+      });
+    }, 2000);
+    var popup = document.createElement('div');
+    popup.innerHTML = '<h2 class="mg__onend--heading">Sweet!</h2>\
+      <p class="mg__onend--message">You won the round in ' + nbMove + ' moves. Congratz !.</p>\
+      <button id="mg__onend--restart" class="mg__button">Play again?</button>';
+      var game = document.getElementById('game');
+    game.appendChild(popup);
+    document.getElementById("mg__onend--restart").addEventListener( "click", function(e) {
+        var menu = document.getElementById('menu_difficulty');
+        unfade(menu);
+        var game = document.getElementById('game');
+        game.remove();
+
+    });
+  } else {
+    // run callback
+    onGameEnd();
   }
+}
+function onGameEnd(){
+  return false;
 }
 function game(){
   var game = document.createElement("div");

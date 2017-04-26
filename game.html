@@ -11,15 +11,15 @@
     <title>Magomashi gamu !</title>
   </head>
   <body>
-    <h1 class="hvr-grow">Magomashi !</h1>
+    <a href="index.html"><h1 class="hvr-grow">Magomashi !</h1></a>
     <section id="theGame">
       <article id="teacher">
-        <img class="perso_image" src="images/teacher.jpg" alt="teacher"><br>
-        <div id="app-3">
-          <span v-if="seen">Now you see me</span>
+        <img id="mascotte" class="perso_image" src="images/hubi.png" alt="teacher"><br>
+        <div class="space"></div>
+        <div class="bulle">
+          <span id="element"></span><br>
+          <span id="rules"></span>
         </div>
-        <span id="element"></span><br>
-        <span id="rules"></span>
         <article id="menu">
           <a id="yes" href="#"><button>Teach me Mago !</button></a>
           <a id="gotIt" href="#"><button>Got it !</button></a>
@@ -31,9 +31,9 @@
       <article id="gameboard">
         <nav id="menu_difficulty">
           <ul id="difficulty">
-            <li><a id="easy" href="#">Easy</a></li>
-            <li><a id="normal" href="#">Normal</a></li>
-            <li><a id="hard" href="#">Hard</a></li>
+            <a id="easy" href="#"><li class="hvr-pulse easy">Easy</li></a>
+            <a id="normal" href="#"><li class="hvr-pulse normal">Normal</li></a>
+            <a id="hard" href="#"><li class="hvr-pulse hard">Hard</li></a>
           </ul>
         </nav>
       </article>
