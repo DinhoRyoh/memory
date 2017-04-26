@@ -1,0 +1,83 @@
+{
+  "easy":[
+  {
+    "score" : 4,
+    "owner": "Dingon",
+    "rank": 1
+  },
+  {
+    "score" : 5,
+    "owner": "Donaldo",
+    "rank": 2
+  },
+  {
+    "score" : 7,
+    "owner": "Porceleia",
+    "rank": 3
+  },
+  {
+    "score" : 9,
+    "owner": "Mulano",
+    "rank": 4
+  },
+  {
+    "score" : 11,
+    "owner": "raie ponce",
+    "rank": 5
+  }
+],
+  "normal":[
+  {
+    "score" : 9,
+    "owner": "Mickey Angelo",
+    "rank": 1
+  },
+  {
+    "score" : 14,
+    "owner": "Elsiv",
+    "rank": 2
+  },
+  {
+    "score" : 16,
+    "owner": "Morguen",
+    "rank": 3
+  },
+  {
+    "score" : 19,
+    "owner": "Kuskon",
+    "rank": 4
+  },
+  {
+    "score" : 35,
+    "owner": "Simboul",
+    "rank": 5
+  }
+  ],
+  "hard":[
+  {
+    "score" : -1,
+    "owner": "Chuck Morrue",
+    "rank": 1
+  },
+  {
+    "score" : 10,
+    "owner": "Steven Migale",
+    "rank": 2
+  },
+  {
+    "score" : 11,
+    "owner": "Brelle la chevre",
+    "rank": 3
+  },
+  {
+    "score" : 14,
+    "owner": "Un mec chelou",
+    "rank": 4
+  },
+  {
+    "score" : 16,
+    "owner": "Pikasacamain",
+    "rank": 5
+  }
+  ]
+}

@@ -29,14 +29,18 @@ function show(_content){
   _content.style.display = 'block';
 }
 function introduction(){
-  event.preventDefault();
-  localStorage.setItem("user",intro.elements["name"].value);
+  if (localStorage.getItem('triggerWithoutForm') == null) {
+    event.preventDefault();
+    localStorage.setItem("user",intro.elements["name"].value);
+  }
   fade(mask);
   fade(intro);
+  var user_name = document.getElementById('user_name');
+  user_name.innerHTML = "I'm not "+ localStorage.getItem('user');
   unfade(content);
-  user_intro.innerHTML = "Our hero "+intro.elements["name"].value;
+  user_intro.innerHTML = "Our hero "+localStorage.getItem("user");
     Typed.new("#element", {
-      strings: ["Hey you ! Hum...", "Hello "+intro.elements["name"].value+"! I'm Mago, nice to meet you !"],
+      strings: ["Hey you ! Hum...", "Hello "+localStorage.getItem("user")+"! I'm Mago, nice to meet you !"],
       typeSpeed: 0
     });
     setTimeout(function () {
@@ -82,10 +86,72 @@ var arrayLevel = [
 chosenLevel = "";
 nbMove = 0;
 var index;
-for (index in arrayLevel) {
-  bindClickAction(arrayLevel[index]);
-  game();
+localStorage.removeItem('currentURL');
+localStorage.setItem('currentURL',window.location.pathname);
+if (localStorage.getItem('currentURL') != "/index.html") {
+  for (index in arrayLevel) {
+    bindClickAction(arrayLevel[index]);
+    game();
+  }
+  var difficulty = document.getElementById("difficulty");
+    difficulty.onclick = function difficulty(){
+      var hoverMessage = document.getElementById('app_2');
+      switch (chosenLevel) {
+        case "easy":
+            var mascotte = document.getElementById('mascotte');
+            mascotte.src = "/images/oktobercat.png";
+            Typed.new("#element", {
+              strings: ["Hey ! I'm Oktober."],
+              typeSpeed: 0
+            });
+            setTimeout(function () {
+              Typed.new("#element", {
+                strings: ["Let's drink !"],
+                typeSpeed: 0
+              });
+            }, 2000);
+            setup(4,2,1);
+          break;
+        case "normal":
+            var mascotte = document.getElementById('mascotte');
+            mascotte.src = "/images/heisencat.png";
+            Typed.new("#element", {
+              strings: ["Hey ! I'm Heisen."],
+              typeSpeed: 0
+            });
+            setTimeout(function () {
+              Typed.new("#element", {
+                strings: ["I got something for you, wanna try it ?!"],
+                typeSpeed: 0
+              });
+            }, 2000);
+            setup(6,3,2);
+          break;
+        case "hard":
+            var mascotte = document.getElementById('mascotte');
+            mascotte.src = "/images/vulcain.png";
+            Typed.new("#element", {
+              strings: ["Hello Human. I'm Vulcat."],
+              typeSpeed: 0
+            });
+            setTimeout(function () {
+              Typed.new("#element", {
+                strings: ["I have no choice then, let's work."],
+                typeSpeed: 0
+              });
+            }, 2000);
+
+            setup(8,4,3);
+          break;
+      }
+  }
 }
+app2 = new Vue({
+  el: '#app_2',
+  data: {
+    message: ""
+  }
+})
 function bindClickAction(index){
   index.onclick = function(){
      chosenLevel = index.id;
@@ -93,6 +159,22 @@ function bindClickAction(index){
      difficulty;
      var menu = document.getElementById('menu_difficulty');
      fade(menu);
+     var data = ['Oktober loves drinking, but he never seems to get drunk. You will always see him with a pint.',
+     'Heisen is a dealer, but be careful ! He is kinda too nice, he shall give you all his stuff even if they are still in experiment.',
+     'Vulcat is vulcain, He has 566 IQ, but he gets easily fascinated by games.'];
+
+     console.log(chosenLevel);
+     switch (chosenLevel) {
+       case "easy":
+         app2.message = data[0];
+         break;
+       case "normal":
+         app2.message = data[1];
+         break;
+       case "hard":
+         app2.message = data[2];
+         break;
+   }
   }
 }
 function shuffleIt(array) {
@@ -175,56 +257,6 @@ function setup(_widthX,_heightY,level){
     var game = document.getElementById('game');
     game.remove();
   }
-}
-var difficulty = document.getElementById("difficulty");
-  difficulty.onclick = function difficulty(){
-    switch (chosenLevel) {
-      case "easy":
-          var mascotte = document.getElementById('mascotte');
-          mascotte.src = "/images/oktobercat.png";
-          Typed.new("#element", {
-            strings: ["Hey ! I'm Oktober."],
-            typeSpeed: 0
-          });
-          setTimeout(function () {
-            Typed.new("#element", {
-              strings: ["Let's drink !"],
-              typeSpeed: 0
-            });
-          }, 2000);
-          setup(4,2,1);
-        break;
-      case "normal":
-          var mascotte = document.getElementById('mascotte');
-          mascotte.src = "/images/heisencat.png";
-          Typed.new("#element", {
-            strings: ["Hey ! I'm heisencat."],
-            typeSpeed: 0
-          });
-          setTimeout(function () {
-            Typed.new("#element", {
-              strings: ["Wanna some pepper ?!"],
-              typeSpeed: 0
-            });
-          }, 2000);
-          setup(6,3,2);
-        break;
-      case "hard":
-          var mascotte = document.getElementById('mascotte');
-          mascotte.src = "/images/vulcain.png";
-          Typed.new("#element", {
-            strings: ["Hello Human. I'm vulcain."],
-            typeSpeed: 0
-          });
-          setTimeout(function () {
-            Typed.new("#element", {
-              strings: ["I have no choice then, let's work."],
-              typeSpeed: 0
-            });
-          }, 2000);
-          setup(8,4,3);
-        break;
-    }
 }
 countGood = 0;
 function play(tile){

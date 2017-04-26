@@ -82,15 +82,19 @@ body{
   }
   #content{
     .user_info{
-      .perso_image{
-        width: 6rem;
-        height: auto;
+      #app_2{
+        .perso_image{
+          width: 6rem;
+          height: auto;
+        }
       }
     }
      #menu{
       display: none;
       button{
-        padding: 7px 65px;
+        width: 250px;
+        padding-bottom: 7px;
+        padding-top: 7px;
         font-family: 'Acme', sans-serif;
         font-weight: bold;
         background-color: rgba(241, 196, 15,1.0);
@@ -102,6 +106,7 @@ body{
           transition: 0.5s ease;
         }
         a{
+
           border: none;
           font-family: 'Acme', sans-serif;
           font-weight: bold;
@@ -164,6 +169,74 @@ body{
       }
     }
   }
+  #scoreContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    #easyScore{
+      h2{
+        color: rgba(39, 174, 96,1.0);
+        span{
+          padding: 10px 35px;
+          border: 3px ridge orange;
+          border-radius: 5px 5px;
+          background-color: rgba(44, 62, 80, 0.7);
+        }
+      }
+    }
+    #normalScore{
+      h2{
+        color: rgba(241, 196, 15,1.0);
+        span{
+          padding: 10px 35px;
+          border: 3px ridge lightgrey;
+          border-radius: 5px 5px;
+          background-color: rgba(44, 62, 80, 0.7);
+        }
+      }
+    }
+    #hardScore{
+      h2{
+        color: rgba(231, 76, 60,1.0);
+        span{
+          padding: 10px 35px;
+          border: 3px ridge yellow;
+          border-radius: 5px 5px;
+          background-color: rgba(44, 62, 80, 0.7);
+        }
+      }
+    }
+    article{
+      table{
+        padding: 0;
+        border-collapse: collapse;
+        th{
+          border: 3px solid rgba(230, 126, 34,1.0);
+          padding: 25px 30px ;
+          color: rgba(41, 128, 185,1.0);
+          background-color: rgba(44, 62, 80, 0.7);
+        }
+        &>tr th,tr td{
+          border: 3px solid rgba(230, 126, 34,1.0);
+          padding: 5px 30px;
+          color: rgba(26, 188, 156,1.0);
+          background-color: rgba(44, 62, 80, 0.7);
+
+        }
+        .tdScore{
+          padding: 5px 100px;
+        }
+      }
+    }
+  }
+}
+#backScore{
+  background-image: url("/images/back.jpg");
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 //not mine
 

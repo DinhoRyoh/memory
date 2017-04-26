@@ -22,7 +22,9 @@
     </div>
     <section id="content">
       <article class="user_info">
-        <img id="mascotte" class="perso_image" src="images/hubi.png" alt="hubi">
+        <div id="app_2" v-bind:title="message">
+          <img id="mascotte" class="perso_image" src="images/hubi.png" alt="hubi">
+        </div>
         <h2 id="welcome"></h2><br>
         <div class="bulle">
           <span id="element"></span>
@@ -30,11 +32,11 @@
       </article>
       <div class="space"></div>
       <div class="space"></div>
-      <div class="space"></div>
-      <div class="space"></div>
       <article id="menu">
         <a href="game.html"><button>Start Game</button></a>
-        <a id="joke" href="#"><button>Kick Mago</button></a>
+        <a id="joke" href="#"><button>Kick Mago</button></a><br>
+        <a id="erase_user" href="#"><button id="user_name"></button></a>
+        <a id="scoreboard" href="scoreboard.html"><button>Scoreboard</button></a>
       </article>
     </section>
   </body>
