@@ -11,7 +11,7 @@ This is a project from It akademy made byme. This project is about working and i
 !!! Important !!!
 I need some tools to build my website:
 
-- [Github](https://github.com/vuejs/vue)
+- [Vue.js](https://github.com/vuejs/vue)
 - [Hover](https://github.com/IanLunn/Hover)
 - [magic](https://github.com/miniMAC/magic)  not required for the moment
 - [typed.js](https://github.com/mattboldt/typed.js/)
