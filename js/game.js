@@ -1,3 +1,4 @@
+//introduction by Mago
 var menu = document.getElementById('menu');
 var element = document.getElementById('element');
 Typed.new("#element", {
@@ -22,6 +23,7 @@ var gameboard = document.getElementById('gameboard');
 var player = document.getElementById('player');
 var rules = document.getElementById('rules');
 hide(gameboard);
+//answer Mago 
 yes.onclick = function(){
   hide(yes);
   hide(no);

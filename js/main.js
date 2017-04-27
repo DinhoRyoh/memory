@@ -6,21 +6,22 @@ button.className += ' magictime puffIn';
 var user_intro = document.getElementById('welcome');
 var element = document.getElementById('element');
 var menu = document.getElementById('menu');
+
+//popup who are you
 if (localStorage.getItem('user') == null) {
   unfade(mask);
   unfade(intro);
   hide(content);
 }else {
+  //pas de popup vu que le nom est deja attribué
   localStorage.setItem('triggerWithoutForm',"hello");
   introduction();
 }
-// }else{
-//   hide(mask);
-//   hide(intro);
-//   show(content);
-// }
+//quoiqu'il en soit on lance la function qui proc sur les event listener
 intro.onsubmit = introduction;
 button.onclick = introduction;
+
+//let's kick Mago ! ^^
 var kick = document.getElementById('joke');
 counterKick = 0;
 kick.onclick = function(){
@@ -50,6 +51,7 @@ kick.onclick = function(){
   }
 }
 
+//I'm not that user
 var erase_user = document.getElementById('erase_user');
 erase_user.onclick = function(){
   localStorage.removeItem('user');

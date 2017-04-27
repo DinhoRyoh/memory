@@ -1,3 +1,5 @@
+//**************************************************
+//functions
 function fade(element) {
     var op = 1;  // initial opacity
     var timer = setInterval(function () {
@@ -68,7 +70,11 @@ loadJSON(function(response) {
 // Parse JSON string into object
   image = JSON.parse(response);
 });
+
+//*****************************************************************************
 //game
+//variables for the game
+
 gameState = 1;
 card1 ="";
 card2 ="";
@@ -77,6 +83,8 @@ card2id = "";
 card1flipped = false;
 card2flipped = false;
 flippedTiles = 0;
+nbMoveTot = 0;
+
 var easy = document.getElementById("easy");
 var normal = document.getElementById("normal");
 var hard = document.getElementById("hard");
@@ -88,16 +96,21 @@ nbMove = 0;
 var index;
 localStorage.removeItem('currentURL');
 localStorage.setItem('currentURL',window.location.pathname);
+
+//click on a level to start game
 if (localStorage.getItem('currentURL') != "/index.html") {
   for (index in arrayLevel) {
     bindClickAction(arrayLevel[index]);
     game();
   }
+
+  //treatment for each level, and each level has its own character
   var difficulty = document.getElementById("difficulty");
     difficulty.onclick = function difficulty(){
       var hoverMessage = document.getElementById('app_2');
       switch (chosenLevel) {
         case "easy":
+            nbMove = 0;
             var mascotte = document.getElementById('mascotte');
             mascotte.src = "/images/oktobercat.png";
             Typed.new("#element", {
@@ -113,6 +126,7 @@ if (localStorage.getItem('currentURL') != "/index.html") {
             setup(4,2,1);
           break;
         case "normal":
+            nbMove = 0;
             var mascotte = document.getElementById('mascotte');
             mascotte.src = "/images/heisencat.png";
             Typed.new("#element", {
@@ -128,6 +142,7 @@ if (localStorage.getItem('currentURL') != "/index.html") {
             setup(6,3,2);
           break;
         case "hard":
+            nbMove = 0;
             var mascotte = document.getElementById('mascotte');
             mascotte.src = "/images/vulcain.png";
             Typed.new("#element", {
@@ -140,7 +155,6 @@ if (localStorage.getItem('currentURL') != "/index.html") {
                 typeSpeed: 0
               });
             }, 2000);
-
             setup(8,4,3);
           break;
       }
@@ -152,6 +166,8 @@ app2 = new Vue({
     message: ""
   }
 })
+
+//set the level function
 function bindClickAction(index){
   index.onclick = function(){
      chosenLevel = index.id;
@@ -177,15 +193,17 @@ function bindClickAction(index){
    }
   }
 }
-function shuffleIt(array) {
-    for (var i = array.image.length - 1; i > 0; i--) {
+//shuffle object
+function shuffleIt(object) {
+    for (var i = object.image.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        var temp = array.image[i];
-        array.image[i] = array.image[j];
-        array.image[j] = temp;
+        var temp = object.image[i];
+        object.image[i] = object.image[j];
+        object.image[j] = temp;
     }
-    return array;
+    return object;
 }
+//shuffle array
 function shuffleIt2(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -195,6 +213,7 @@ function shuffleIt2(array) {
     }
     return array;
 }
+//fill the tiles
 function fillTile(_widthX,_heightY){
   var tile = document.createElement('div');
   tile.className = "topping";
@@ -202,6 +221,7 @@ function fillTile(_widthX,_heightY){
   var shuffle = [];
   shuffle = shuffleIt(image);
   numTiles = _widthX * _heightY;
+  console.log(numTiles);
   var halfNum = numTiles/2;
   cardInGame = [];
   for (var i = 0; i < halfNum; i++) {
@@ -225,6 +245,7 @@ function fillTile(_widthX,_heightY){
     play(tile);
   };
 }
+// setup the board game
 function setup(_widthX,_heightY,level){
   var board = document.createElement('div');
   board.id = "board";
@@ -315,6 +336,41 @@ function play(tile){
                 typeSpeed: 0
               });
               countGood = countGood + 1;
+                          break;
+            case 16:
+              Typed.new("#element", {
+                strings: ["JESUUS CHRISST !"],
+                typeSpeed: 0
+              });
+              countGood = countGood + 1;
+                          break;
+            case 17:
+              Typed.new("#element", {
+                strings: ["SENPAIIIIIII"],
+                typeSpeed: 0
+              });
+              countGood = countGood + 1;
+                          break;
+            case 18:
+              Typed.new("#element", {
+                strings: ["HAAAAAAAAAaaaaaaaaaaaaaaaaaaaaaaaaa  a."],
+                typeSpeed: 0
+              });
+              countGood = countGood + 1;
+                          break;
+            case 19:
+              Typed.new("#element", {
+                strings: ["God of memory, is that you ?"],
+                typeSpeed: 0
+              });
+              countGood = countGood + 1;
+                          break;
+            case 20:
+              Typed.new("#element", {
+                strings: ["....kreygasm"],
+                typeSpeed: 0
+              });
+              countGood = countGood + 1;
               break;
             default:   countGood = countGood + 1;
           }
@@ -339,8 +395,10 @@ function gameCardsMatch() {
     card2.classList.remove("correct");
     gameResetVars();
     flippedTiles = flippedTiles + 2;
+    console.log(flippedTiles);
     if (flippedTiles == numTiles) {
       winGame();
+      flippedTiles = 0;
     }
   }, 1500 );
 
@@ -370,6 +428,18 @@ function gameCounterPlusOne() {
   nbMove = nbMove + 1;
   moveCounterUpdate = document.getElementById("mg__meta--moves").innerHTML = nbMove;
 };
+function loadJSONScore(callback) {
+  var xobj = new XMLHttpRequest();
+      xobj.overrideMimeType("application/json");
+  xobj.open('GET', '/scoreboard.json', true); // Replace 'my_data' with the path to your file
+  xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+          callback(xobj.responseText);
+        }
+  };
+  xobj.send(null);
+}
 function winGame() {
   if (onGameEnd() === false) {
     var mascotte = document.getElementById('mascotte');
@@ -383,12 +453,96 @@ function winGame() {
         typeSpeed: 0
       });
     }, 2000);
+
+    //store items
+    nbMoveTot = nbMoveTot + nbMove;
+    localStorage.setItem('moveTot',nbMoveTot);
+    try {
+      var object = JSON.parse(localStorage.getItem('scoreboard'));
+    } catch (e) {
+      console.log("error ! fix it", e);
+    }
+      if (object != null) {
+      var foundUser = false;
+      var foundLevel = false;
+      for (var userName in object) {
+        if (userName == localStorage.getItem('user')) {
+          console.log(object[userName]);
+          foundUser = true;
+        }
+        for (var level in userName) {
+          if (level == localStorage.getItem('level')) {
+            // object[userName][level] = nbMove;
+            console.log(object[userName][level]);
+            foundLevel = true;
+          }
+        }
+      }
+      console.log(chosenLevel);
+      console.log(object);
+      if (!foundUser) {
+        if (foundLevel) {
+          object[localStorage.getItem('user')][chosenLevel] = nbMove;
+        }else {
+          object[localStorage.getItem('user')][chosenLevel] = nbMove;
+        }
+      }else {
+        if (!foundLevel) {
+          object[localStorage.getItem('user')][chosenLevel] = nbMove;
+        }else {
+          object[localStorage.getItem('user')][chosenLevel] = nbMove;
+        }
+      }
+      localStorage.setItem("scoreboard", JSON.stringify(object));
+    }else {
+      var player = localStorage.getItem('user');
+      var str = '{"'+player+'":{"'+chosenLevel+'":'+nbMove+'}}';
+      var newObject = JSON.parse(str);
+      localStorage.setItem("scoreboard", JSON.stringify(newObject));
+    }
     var popup = document.createElement('div');
     popup.innerHTML = '<h2 class="mg__onend--heading">Sweet!</h2>\
       <p class="mg__onend--message">You won the round in ' + nbMove + ' moves. Congratz !.</p>\
-      <button id="mg__onend--restart" class="mg__button">Play again?</button>';
+      <button id="mg__onend--restart" class="mg__button">Play again?</button><br>\
+      ';
       var game = document.getElementById('game');
     game.appendChild(popup);
+    loadJSONScore(function(response) {
+    // Parse JSON string into object
+      score = JSON.parse(response);
+      var div = document.createElement('div');
+      var str = '<table id="'+level+'" class="scoring"><tr><th>Joueur</th><th>Score</th><th>Rank</th></tr>';
+      var ranked = false;
+      for (level in score) {
+        var i = 0;
+        var prev;
+        console.log(level);
+        for (var value in score[level]) {
+          console.log(value);
+          if (level == chosenLevel) {
+            if (i !=0) {
+              if (prev < nbMove && nbMove < score[level][value]["score"] && !ranked) {
+                str = str + '<tr><td>'+localStorage.getItem('user')+'</td><td class="tdScore">'+nbMove+'</td><td>'+score[level][value]["rank"]+'</td></tr>';
+                ranked = true;
+              }else if (prev == nbMove) {
+                str = str + '<tr><td>'+score[level][value]["owner"]+'</td><td class="tdScore">'+score[level][value]["score"]+'</td><td>'+score[level][value]["rank"]+'</td></tr>';
+                str = str + '<tr><td>'+localStorage.getItem('user')+'</td><td class="tdScore">'+nbMove+'</td><td>'+score[level][value]["rank"]+'</td></tr>';
+              }
+              else {
+                str = str + '<tr><td>'+score[level][value]["owner"]+'</td><td class="tdScore">'+score[level][value]["score"]+'</td><td>'+score[level][value]["rank"]+'</td></tr>';
+              }
+            }else {
+              str = str + '<tr><td>'+score[level][value]["owner"]+'</td><td class="tdScore">'+score[level][value]["score"]+'</td><td>'+score[level][value]["rank"]+'</td></tr>';
+            }
+          }
+          prev = score[level][value]["score"];
+          i++;
+        }
+        str = str + '</table>';
+        div.innerHTML = str;
+        popup.appendChild(div);
+      }
+    });
     document.getElementById("mg__onend--restart").addEventListener( "click", function(e) {
         var menu = document.getElementById('menu_difficulty');
         unfade(menu);
