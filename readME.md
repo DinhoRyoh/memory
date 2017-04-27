@@ -11,15 +11,15 @@ This is a project from It akademy made byme. This project is about working and i
 !!! Important !!!
 I need some tools to build my website:
 
-- Vue.js
-- Hover
-- magic
-- typed.js
+- [Github](https://github.com/vuejs/vue)
+- [Hover](https://github.com/IanLunn/Hover)
+- [magic](https://github.com/miniMAC/magic)  not required for the moment
+- [typed.js](https://github.com/mattboldt/typed.js/)
 
 
 ## Authors
 
-* **Dinh Nguyen** - *Initial work* - [PurpleBooth](https://github.com/DinhoRyoh)
+* **Dinh Nguyen** - *Initial work* - [Github](https://github.com/DinhoRyoh)
 
 
 ## License
