@@ -7,8 +7,8 @@ Staring Octocat.
 
 This is a project from It akademy made byme. This project is about working and improving my skills in Javascript
 
-### Installing
-
+### Installing & Required
+!!! Important !!!
 I need some tools to build my website:
 
 - Vue.js
