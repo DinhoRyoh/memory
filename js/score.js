@@ -35,6 +35,8 @@ loadJSON(function(response) {
     }
   }
 });
+//adding the user informations
+
 var move = document.getElementById('move');
 if (localStorage.getItem('moveTot') == null) {
   move.innerHTML = "Total move : 0";

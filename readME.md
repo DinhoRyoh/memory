@@ -5,11 +5,14 @@ Staring Octocat.
 
 ## Getting Started
 
-This is a project from It akademy made byme. This project is about working and improving my skills in Javascript
+This is a project from It akademy made by me. This project is about working and improving my skills in Javascript.
+The game is the memory, simple but interactions with the cats are funny, it make this game more playful !
+Hope you'll like it !
 
 ### Installing & Required
 !!! Important !!!
-I need some tools to build my website:
+The vendor's files are compressed, please extract all files in the same folder.
+I need some tools to run my website:
 
 - [Vue.js](https://github.com/vuejs/vue)
 - [Hover](https://github.com/IanLunn/Hover)

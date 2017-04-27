@@ -294,6 +294,7 @@ function play(tile){
         card2id = this.getAttribute("data-id");
         card2flipped = true;
         if ( card1id == card2id ) {
+          //messages during the game
           switch (countGood) {
             case 1:
               Typed.new("#element", {

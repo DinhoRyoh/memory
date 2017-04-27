@@ -23,7 +23,7 @@ var gameboard = document.getElementById('gameboard');
 var player = document.getElementById('player');
 var rules = document.getElementById('rules');
 hide(gameboard);
-//answer Mago 
+//answer Mago
 yes.onclick = function(){
   hide(yes);
   hide(no);
@@ -41,6 +41,7 @@ no.onclick = function(){
   element.innerHTML = "Let's play !";
   unfade(gameboard);
   player.innerHTML = "player : "+localStorage.getItem('user');
+  //lines for the memory game taken from the web for test
   // var memo = new Memory({
   //     wrapperID : "game",
   //   });
@@ -50,12 +51,14 @@ gotIt.onclick = function(){
   element.innerHTML = "Let's play !";
   unfade(gameboard);
   player.innerHTML = "player : "+localStorage.getItem('user');
+  //lines for the memory game taken from the web for test
   // var memo = new Memory({
   //     wrapperID : "game",
   //   });
   var mascotte = document.getElementById('mascotte');
   mascotte.src = "/images/hubi.png";
 }
+//we can't see app-3 #vue.js
 var app3 = new Vue({
   el: '#app-3',
   data: {
